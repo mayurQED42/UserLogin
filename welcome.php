@@ -1,6 +1,7 @@
 <html>
     <body>
         <?php
+        session_start();
             class Wel{
                 public function __construct(){
                     $name=$_POST["name"];
@@ -17,7 +18,12 @@
                         $r=$stmt->fetch();
                         if(!strcmp($passs,$r['pass']))
                         {
-                            echo "WELCOME ".$name."<br>You are logged in successfully!!!";
+                            echo "WELCOME <br>You are logged in successfully!!!";
+
+                            
+                            $_SESSION["name"] = $name;
+                            
+                            
                         }
                         else
                         {

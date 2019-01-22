@@ -1,4 +1,14 @@
 <html>
+<?php
+session_start();
+
+if (isset($_SESSION['name'])) {
+  
+    header("Location:welcome.php");
+}
+else{
+?>
+
     <style>
         .page{
             background-color: bisque;
@@ -27,7 +37,7 @@
             </div>
         </form>
         <?php
-
+        }
         ?>
     </body>
 </html>
