@@ -1,21 +1,21 @@
 <html>
     <body>
         <?php
+        include "myDb.php";
         class Reg{
+            public $dbh;
             public function __construct()
             {
                 $name=$_POST["name"];
                 $email=$_POST["email"];
                 $dob=$_POST["dob"];
                 $passs=$_POST["password"];
+                $this->dbh=new myDb();
         
                 try {
-                    $user = "root";
-                    $pass = "root";
-                    $dbh = new PDO('mysql:host=localhost;dbname=LoginPage', $user, $pass);
-                    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    
                     $que="INSERT INTO reginfo (cname, email, dob, pass) VALUES ('$name', '$email', '$dob', '$passs')";
-                    $stmt=$dbh->prepare($que);
+                    $stmt=$this->dbh->dbh->prepare($que);
                     $stmt->execute();
 
                 } catch (PDOException $e) {

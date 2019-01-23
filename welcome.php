@@ -2,16 +2,16 @@
     <body>
         <?php
         session_start();
+        include "myDb.php";
             class Wel{
+                public $dbh;
                 public function __construct(){
                     $name=$_POST["name"];
                     $passs=$_POST["pass"];
+                    $this->dbh=new myDb();
                     try {
-                        $user = "root";
-                        $pass = "root";
-                        $dbh = new PDO('mysql:host=localhost;dbname=LoginPage', $user, $pass);
-                        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        $stmt=$dbh->prepare("SELECT pass FROM reginfo WHERE cname='$name'"); 
+                        
+                        $stmt=$this->dbh->dbh->prepare("SELECT pass FROM reginfo WHERE cname='$name'"); 
                         $stmt->execute();
                         $stmt->setFetchMode(PDO::FETCH_ASSOC);
                         //while($r=$stmt->fetch()){
