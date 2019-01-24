@@ -28,7 +28,7 @@ else{
         $res=$u->login($_POST['name'],$_POST['pass']);
         if($res)
         {
-            $_SESSION["name"] = $name;   
+            $_SESSION['name'] = $_POST['name'];   
             header("Location:welcome.php");
         }
     }
