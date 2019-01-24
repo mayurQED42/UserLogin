@@ -1,6 +1,4 @@
 <?php
-
-
 class myDb{
     public $dbh;
     function __construct()
@@ -18,5 +16,4 @@ class myDb{
         return $this->dbh;
     }
 }
-
 ?>
