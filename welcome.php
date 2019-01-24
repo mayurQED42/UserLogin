@@ -13,7 +13,6 @@ session_start();
 welcome<br><br>
 <input type="submit" value="LOGOUT" name="LOGOUT"><br>
 </form>
-
 </body>
 </html>
 
