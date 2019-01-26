@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
 if (isset($_SESSION['name'])) {
     header("Location:welcome.php");
@@ -29,8 +31,10 @@ else{
         $u=new User();
         
         $res=$u->login($_POST['name'],$_POST['pass']);
+      
         if($res)
         {
+           
             if($_POST["remember_me"]=='1' || $_POST["remember_me"]=='on')
             {
                 $hour = time() + 3600 * 24 * 30;
@@ -40,6 +44,7 @@ else{
             $_SESSION['name'] = $_POST['name'];   
             header("Location:welcome.php");
         }
+       
     }
 }
     ?>

@@ -4,6 +4,7 @@ class myDb{
     function __construct()
     {
         try{
+            //created connection object
             $user = "root";
             $pass = "root";
             $this->dbh = new PDO('mysql:host=localhost;dbname=LoginPage', $user, $pass);
