@@ -1,5 +1,6 @@
 <?php
-//namespace mayur\UserLogin;
+namespace mayur\UserLogin;
+use \PDO;
 class myDb{
     public $dbh;
     function __construct()

@@ -1,15 +1,15 @@
 <?php
-//namespace mayur\UserLogin;
-
+namespace mayur\UserLogin;
+use mayur\UserLogin\myDb;
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 //Load Composer's autoloader
 require 'vendor/autoload.php';
-    spl_autoload_register(function ($class_name) {
-    include $class_name . '.php';
-    });
+    // spl_autoload_register(function ($class_name) {
+    // include $class_name . '.php';
+    // });
     
     class User {
                 /**
@@ -20,7 +20,7 @@ require 'vendor/autoload.php';
                     $dbh = new myDb();
                     $stmt=$dbh->dbh->prepare("SELECT pass FROM reginfo WHERE cname='$name' and active=1"); 
                     $stmt->execute();
-                    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                    //$stmt->setFetchMode(PDO::FETCH_ASSOC);
                     $r=$stmt->fetch();
                     $p=md5($passs);
                     if(!strcmp($p,$r['pass']))
@@ -54,7 +54,7 @@ require 'vendor/autoload.php';
                     $dbh = new myDb();
                     $stmt=$dbh->dbh->prepare("UPDATE reginfo SET active=1 WHERE email='$email' AND hashh='$hash'"); 
                     $stmt->execute();
-                    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                    //$stmt->setFetchMode(PDO::FETCH_ASSOC);
                     $r=$stmt->execute();
                     if($r)
                     {

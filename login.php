@@ -1,4 +1,9 @@
 <?php
+require 'vendor/autoload.php';
+use mayur\UserLogin\myDb;
+use mayur\UserLogin\User;
+
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
@@ -25,8 +30,9 @@ else{
     
     if($_SERVER["REQUEST_METHOD"]=="POST")
     {
-        include "myDb.php";
-        include "User.php";
+        
+        //include "myDb.php";
+        //include "User.php";
       
         $u=new User();
         
@@ -43,6 +49,9 @@ else{
             }
             $_SESSION['name'] = $_POST['name'];   
             header("Location:welcome.php");
+        }
+        else{
+            echo "User is not active or may some problem occured";
         }
        
     }

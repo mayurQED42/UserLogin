@@ -1,6 +1,9 @@
  <?php
-    include "myDb.php";
-    include "User.php";
+ use mayur\UserLogin\myDb;
+ use mayur\UserLogin\User;
+ require 'vendor/autoload.php';
+    //include "myDb.php";
+    //include "User.php";
 
     $u=new User();
  
