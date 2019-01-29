@@ -62,13 +62,7 @@ else{
             //mail veerification:sending mail
             
             $re=$u->sendmail($_POST['name'],$_POST['password'],$_POST['email'],$h);
-            if($re)
-            {
-                echo "email has been sent.. please click on link to registered yourself.";
-            }     
-            else{
-                echo "may some problem occured un sending mail";
-            }    
+            
         }
     }
         ?>
