@@ -47,8 +47,8 @@ else{
                 setcookie('name', $_POST['name'], $hour);
                 setcookie('pass', $_POST['pass'], $hour);
             }
-            $_SESSION['name'] = $_POST['name'];   
-            header("Location:welcome.php");
+            // $_SESSION['name'] = $_POST['name'];   
+            header("Location:welcome.php?name=".$_POST['name']."&pass=".$_POST['pass']);
         }
         else{
             echo "User is not active or may some problem occured";

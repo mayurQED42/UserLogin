@@ -34,14 +34,13 @@ else{
                     Email id: <input type="text" name="email" ><br>
                     DOB: <input type="text" name="dob" ><br>
                     Password: <input type="password" name="password"><br>
+                    Role:<input type="radio" name="myrole" value="admin"> admin<br>
+                        <input type="radio" name="myrole" value="newbie"> newbie<br>
+                        <input type="radio" name="myrole" value="mentor"> mentor<br> 
                     <input type="submit" value="register" name="register"><br>
-                    
+                    <h1>if you are already registered</h1><a href="login.php">LOGIN</a><br>
             </div>
             </div>
-        </form>
-        <form action="login.php" method="GET">
-        <h1>if you are already registered</h1><br>
-        <button type="submit" formaction="./login.php">LOGIN</button>
         </form>
         </body>
 </html>
@@ -58,9 +57,8 @@ else{
             //hash code
             $h=md5(rand(0,1000));
             $u=new User();
-            $ress=$u->reguser($_POST['name'],$_POST['email'],$_POST['dob'],$_POST['password'],$h);
+            $ress=$u->reguser($_POST['name'],$_POST['email'],$_POST['dob'],$_POST['password'],$h,$_POST['myrole']);
             //mail veerification:sending mail
-            
             $re=$u->sendmail($_POST['name'],$_POST['password'],$_POST['email'],$h);
             
         }

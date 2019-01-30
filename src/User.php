@@ -36,11 +36,11 @@ require 'vendor/autoload.php';
                 /**
                 *Helper method for user registration 
                 */
-                public function reguser($name,$email,$dob,$passs,$h)
+                public function reguser($name,$email,$dob,$passs,$h,$ro)
                 {
                     $p=md5($passs);
                     $dbh=new myDb();
-                    $que="INSERT INTO reginfo (cname, email, dob, pass,hashh,active) VALUES ('$name', '$email', '$dob', '$p','$h',0)";
+                    $que="INSERT INTO reginfo (cname, email, dob, pass,hashh,active,role) VALUES ('$name', '$email', '$dob', '$p','$h',0,'$ro')";
                     $stmt=$dbh->dbh->prepare($que);
                     $val=$stmt->execute();
                     return $val;
@@ -65,7 +65,7 @@ require 'vendor/autoload.php';
                         return false;  
                     }
                 }
-                
+
                 /**
                 *Helper method for sending mail 
                 */
@@ -108,5 +108,51 @@ require 'vendor/autoload.php';
                         echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
                     }
                 }
+
+                /**
+                * Helper method for checking admin.
+                */
+                public function checkadmin($name,$passs)
+                {   
+                    $dbh = new myDb();
+                    $stmt=$dbh->dbh->prepare("SELECT Id FROM reginfo WHERE cname='$name' and pass='$passs' and role='admin'"); 
+                    $stmt->execute();
+                    //$stmt->setFetchMode(PDO::FETCH_ASSOC);
+                    $r=$stmt->fetch();
+                    if($r)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;  
+                    }
+                }
+
+                /**
+                * Helper method for delete user.
+                */
+                public function deleteuser($id)
+                {
+                    $dbh = new myDb();
+                    if($id==1)
+                    {
+                        return false;
+                    }
+                    else{
+                    $stmt=$dbh->dbh->prepare("DELETE FROM reginfo WHERE id='$id'"); 
+                    $r=$stmt->execute();
+                    //$stmt->setFetchMode(PDO::FETCH_ASSOC);
+                    if($r)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;  
+                    } 
+                }
+                }
+
     }
 ?>
