@@ -36,11 +36,11 @@ require 'vendor/autoload.php';
                 /**
                 *Helper method for user registration 
                 */
-                public function reguser($name,$email,$dob,$passs,$h,$ro)
+                public function reguser($name,$email,$dob,$passs,$h,$acti,$ro)
                 {
                     $p=md5($passs);
                     $dbh=new myDb();
-                    $que="INSERT INTO reginfo (cname, email, dob, pass,hashh,active,role) VALUES ('$name', '$email', '$dob', '$p','$h',0,'$ro')";
+                    $que="INSERT INTO reginfo (cname, email, dob, pass,hashh,active,role) VALUES ('$name', '$email', '$dob', '$p','$h','$acti','$ro')";
                     $stmt=$dbh->dbh->prepare($que);
                     $val=$stmt->execute();
                     return $val;
@@ -141,8 +141,9 @@ require 'vendor/autoload.php';
                     }
                     else{
                     $stmt=$dbh->dbh->prepare("DELETE FROM reginfo WHERE id='$id'"); 
-                    $r=$stmt->execute();
+                    $stmt->execute();
                     //$stmt->setFetchMode(PDO::FETCH_ASSOC);
+                    $r=$stmt->fetch();
                     if($r)
                     {
                         return true;
@@ -152,6 +153,74 @@ require 'vendor/autoload.php';
                         return false;  
                     } 
                 }
+                }
+            
+                /**
+                * Helper method for filter user.
+                */
+                public function myfilter($role)
+                {   
+                    $stmt;
+                    $dbh = new myDb();
+                    if($role=="all")
+                    {
+                        $stmt=$dbh->dbh->prepare("SELECT * FROM reginfo");
+                    }
+                    else{
+                        $stmt=$dbh->dbh->prepare("SELECT * FROM reginfo WHERE role='$role'"); 
+                    }
+                        $stmt->execute();
+                    //$stmt->setFetchMode(PDO::FETCH_ASSOC);
+                    $r=$stmt->fetchAll();
+                    if($r)
+                    {
+                        return $r;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+
+                /**
+                * Helper method for get user info.
+                */
+                public function getinfo($id)
+                {   
+                   
+                    $dbh = new myDb();
+                    
+                    $stmt=$dbh->dbh->prepare("SELECT Id,cname,email,dob,pass FROM reginfo WHERE Id='$id'"); 
+                
+                    $stmt->execute();
+                    //$stmt->setFetchMode(PDO::FETCH_ASSOC);
+                    $r=$stmt->fetchAll();
+                    if($r)
+                    {
+                        return $r;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+
+                /**
+                * Helper method for edit user info.
+                */
+                public function editinfo($id,$name,$email,$dob,$pass)
+                {   
+                      
+                    $dbh = new myDb();
+                    //$stmt=$dbh->dbh->prepare("UPDATE reginfo SET active=1 WHERE email='$email' AND hashh='$hash'");
+                    $stmt=$dbh->dbh->prepare("UPDATE reginfo SET cname='$name',email='$email',dob='$dob',pass='$pass' WHERE Id = '$id'"); 
+                
+                    $r=$stmt->execute();
+                    if($r)
+                    {
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
                 }
 
     }

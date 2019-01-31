@@ -6,6 +6,7 @@ session_start();
     $u=new User();
     $p=md5($_GET['pass']);
     $res=$u->checkadmin($_GET['name'],$p);
+    $_SESSION['role'] = "admin"; 
     
     
     if($_SERVER["REQUEST_METHOD"]=="POST")
@@ -21,16 +22,18 @@ session_start();
         //echo "id=".$_POST['id']."<br>";
     }
     
-    if($res)
+    if($res || $_SESSION['role'] = "admin")
     {
         
 ?>   
 <html>
 <body>
 <form action="" method="POST">
-<h1>welcome admin<h1><br>
-<a href="register.php">Register User</a><br><br>enter id to delete user<br>
-id: <input type="text" name="id" ><button type="submit">delete</button><br><br>
+<h1>Welcome Admin <h1><br>
+Add User : <a href="adduser.php?actuser=admin">Register User</a><br><br>Enter Id to delete user<br>
+Id: <input type="text" name="id" ><button type="submit">delete</button><br><br>
+diplay user :<a href="filter.php">filter user</a><br><br>
+edit user :<a href="edit.php">edit user</a><br><br>
 
 <a href="logout.php">logout</a>
 </form>
@@ -44,7 +47,7 @@ id: <input type="text" name="id" ><button type="submit">delete</button><br><br>
 <html>
 <body>
 <form action="" method="POST">
-<h2>welcome user<h2><br><br>
+<h2>welcome user <h2><br><br>
 <a href="logout.php">logout</a>
 </form>
 </body>

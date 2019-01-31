@@ -7,8 +7,8 @@ use mayur\UserLogin\User;
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
-if (isset($_SESSION['name'])) {
-    header("Location:welcome.php");
+if (isset($_SESSION['role'])) {
+   header("Location:welcome.php");
 }
 else{
 ?>
@@ -22,6 +22,8 @@ else{
                 RememberMe
                 <br>
                 <input type="submit">
+                <br>
+                <h1>if you dont have account <a href="register.php">register here</a></h1>
         </form>
     </body>
     </html>
@@ -47,7 +49,7 @@ else{
                 setcookie('name', $_POST['name'], $hour);
                 setcookie('pass', $_POST['pass'], $hour);
             }
-            // $_SESSION['name'] = $_POST['name'];   
+            $_SESSION['name'] = $_POST['name'];   
             header("Location:welcome.php?name=".$_POST['name']."&pass=".$_POST['pass']);
         }
         else{
