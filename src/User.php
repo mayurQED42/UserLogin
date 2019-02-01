@@ -184,12 +184,12 @@ require 'vendor/autoload.php';
                 /**
                 * Helper method for get user info.
                 */
-                public function getinfo($id)
+                public function getinfo()
                 {   
                    
                     $dbh = new myDb();
                     
-                    $stmt=$dbh->dbh->prepare("SELECT Id,cname,email,dob,pass FROM reginfo WHERE Id='$id'"); 
+                    $stmt=$dbh->dbh->prepare("SELECT Id,cname,email,dob FROM reginfo"); 
                 
                     $stmt->execute();
                     //$stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -206,12 +206,12 @@ require 'vendor/autoload.php';
                 /**
                 * Helper method for edit user info.
                 */
-                public function editinfo($id,$name,$email,$dob,$pass)
+                public function editinfo($id,$name,$email,$dob)
                 {   
                       
                     $dbh = new myDb();
                     //$stmt=$dbh->dbh->prepare("UPDATE reginfo SET active=1 WHERE email='$email' AND hashh='$hash'");
-                    $stmt=$dbh->dbh->prepare("UPDATE reginfo SET cname='$name',email='$email',dob='$dob',pass='$pass' WHERE Id = '$id'"); 
+                    $stmt=$dbh->dbh->prepare("UPDATE reginfo SET cname='$name',email='$email',dob='$dob' WHERE Id = '$id'"); 
                 
                     $r=$stmt->execute();
                     if($r)

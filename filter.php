@@ -43,9 +43,12 @@ select filter operator:<br>
             echo "<tr><td>";
             for ( $column = 0; $column < 8; $column++ )
             {
-                echo $re[$row][$column] ;
-                echo "<td>";
+                
+                    echo $re[$row][$column] ;
+                    echo "<td>";
+                    
             }
+            
             echo "</tr>";
         }
     }

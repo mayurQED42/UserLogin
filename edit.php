@@ -11,51 +11,33 @@ $u;
 <head></head>
 <body>
 <a href="welcome.php">back</a><br><br>
-<form method="GET" action="">
-id: <input type="text" name="id"><button type="submit">show</button><br>
-</form>
 </body>
 </html>
 
 <?php
-if($_SERVER["REQUEST_METHOD"]=="GET")
-{
 $u=new User();
-$res=$u->getinfo($_GET['id']);
-if($res)
+$re=$u->getinfo();
+if($re)
 {
-?>
-
-<html>
-<head></head>
-<body>
-<form method="POST" action="">
-<h1>user info</h1>
-id: <input type="text" name="id" value="<?php echo $res[0][0]?>"><br>
-Name: <input type="text" name="name" value="<?php echo $res[0][1]?>"><br>
-Email id: <input type="text" name="email" value="<?php echo $res[0][2]?>"><br>
-DOB: <input type="text" name="dob" value="<?php echo $res[0][3]?>"><br>
-Password: <input type="password" name="password" value="<?php echo $res[0][4]?>"><br>
-<button type="submit">edit</button><br>
-</form>    
-</body>
-</html>
-
-<?php
-}
-}
-if($_SERVER["REQUEST_METHOD"]=="POST")
-{
+    echo "<table border=2>";
+        echo "<tr><th>Id</th><th>name</th><th>email</th><th>dob</th><th>edit</th></tr>";
+        for ( $row = 0; $row < count($re); $row++ )
+        {
+            echo "<tr><td>";
+            for ( $column = 0; $column < 4; $column++ )
+            {
+                
+                    echo $re[$row][$column] ;
+                    echo "<td>";
+                    if($column==3)
+                    {
+                       echo "<a href=edit1.php?id=".$re[$row][0]."&name=".$re[$row][1]."&email=".$re[$row][2]."&dob=".$re[$row][3].">edit</a>";
+                       echo "<td>";
+                    }
+            }
+            
+            echo "</tr>";
+        }
+}    
     
-    $u1=new User();
-    $res=$u1->editinfo($_POST['id'],$_POST['name'],$_POST['email'],$_POST['dob'],$_POST['password']);
-   
-    if($res)
-    {
-        echo "data is updated";
-    }
-    else{
-        echo "data is not updated";
-    }
-}
 ?>
