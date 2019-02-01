@@ -10,6 +10,7 @@ $u;
 <html>
 <head></head>
 <body>
+<a href="welcome.php">back</a><br><br>
 <form method="GET" action="">
 id: <input type="text" name="id"><button type="submit">show</button><br>
 </form>

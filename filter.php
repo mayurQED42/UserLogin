@@ -5,12 +5,14 @@ use mayur\UserLogin\User;
     //echo "here we gonna filter users";
     error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 ?>
 
 <html>
 <head></head>
 <body>
 <form action="" method="POST">
+<a href="welcome.php">back</a><br><br>
 select filter operator:<br>
 <input type="radio" name="myrole" value="admin"> admin<br>
 <input type="radio" name="myrole" value="newbie"> newbie<br>

@@ -58,19 +58,12 @@ else{
             $h=md5(rand(0,1000));
             $u=new User();
             
-            if($_POST['myrole']=="admin")
+            if($_POST['myrole']=="admin" || $_POST['myrole']=="newbie" || $_POST['myrole']=="mentor")
             {
                 $acti=1;
             }
-            elseif($_POST['myrole']=="newbie")
+            else
             {
-                $acti=1;
-            }
-            elseif($_POST['myrole']=="mentor")
-            {
-                $acti=1;
-            }
-            else{
                 $acti=0;
             }
             $ress=$u->reguser($_POST['name'],$_POST['email'],$_POST['dob'],$_POST['password'],$h,$acti,$_POST['myrole']);
