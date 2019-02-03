@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'vendor/autoload.php';
 use mayur\UserLogin\myDb;
 use mayur\UserLogin\User;
@@ -15,8 +16,29 @@ $u;
 </html>
 
 <?php
-$u=new User();
-$re=$u->getinfo();
+
+        $page=$_GET['page'];
+        if($page=="" || $page=="1")
+        {
+            $_SESSION['page1']=0;
+        }
+        else
+        {
+            $_SESSION['page1']=($page*20)-20;
+        }
+        
+        $u=new User();
+        $count=$u->getrows();
+        //echo $count;exit();
+
+        $pageCount=ceil($count/20);
+        for($b=1;$b<=$pageCount;$b++)
+        {
+            ?><a href="edit.php?page=<?php echo $b; ?>"><?php echo $b." ";?></a><?php
+        }
+        $u=new User();
+       $re=$u->getinfo();
+
 if($re)
 {
     echo "<table border=2>";

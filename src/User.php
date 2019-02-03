@@ -154,7 +154,21 @@ require 'vendor/autoload.php';
                     } 
                 }
                 }
-            
+
+                public function getrowsmyrole($mro)
+                {   
+                   
+                    $dbh = new myDb();
+                    
+                    $stmt=$dbh->dbh->prepare("SELECT * FROM reginfo WHERE role='$mro'"); 
+                
+                    $stmt->execute();
+                    $r=$stmt->rowCount();
+                   //echo $r;exit();
+                    return $r;
+                    
+                   
+                }
                 /**
                 * Helper method for filter user.
                 */
@@ -164,10 +178,10 @@ require 'vendor/autoload.php';
                     $dbh = new myDb();
                     if($role=="all")
                     {
-                        $stmt=$dbh->dbh->prepare("SELECT * FROM reginfo");
+                        $stmt=$dbh->dbh->prepare("SELECT * FROM reginfo LIMIT $_SESSION[mypage1],20");
                     }
                     else{
-                        $stmt=$dbh->dbh->prepare("SELECT * FROM reginfo WHERE role='$role'"); 
+                        $stmt=$dbh->dbh->prepare("SELECT * FROM reginfo WHERE role='$role' LIMIT $_SESSION[my1page1],20"); 
                     }
                         $stmt->execute();
                     //$stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -189,7 +203,7 @@ require 'vendor/autoload.php';
                    
                     $dbh = new myDb();
                     
-                    $stmt=$dbh->dbh->prepare("SELECT Id,cname,email,dob FROM reginfo"); 
+                    $stmt=$dbh->dbh->prepare("SELECT Id,cname,email,dob FROM reginfo LIMIT $_SESSION[page1],20"); 
                 
                     $stmt->execute();
                     //$stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -201,6 +215,20 @@ require 'vendor/autoload.php';
                     else{
                         return false;
                     }
+                }
+                public function getrows()
+                {   
+                   
+                    $dbh = new myDb();
+                    
+                    $stmt=$dbh->dbh->prepare("SELECT * FROM reginfo"); 
+                
+                    $stmt->execute();
+                    $r=$stmt->rowCount();
+                   //echo $r;exit();
+                    return $r;
+                    
+                   
                 }
 
                 /**

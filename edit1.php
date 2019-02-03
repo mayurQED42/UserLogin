@@ -1,7 +1,7 @@
 <html>
 <head></head>
 <body>
-<a href="welcome.php">back</a><br><br>
+<a href="edit.php">back</a><br><br>
 </body>
 </html>
 
